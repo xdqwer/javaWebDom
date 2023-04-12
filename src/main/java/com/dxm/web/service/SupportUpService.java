@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class SupportUpService {
 
-    public void updateSupportService(int atcid,int support) throws SQLException {
+    public void updateSupportService(int support,int atcid) throws SQLException {
         SupportUpDao supportUpDao = new SupportUpDao();
-        supportUpDao.updateSupport(atcid,support);
+        supportUpDao.updateSupport(support,atcid);
     }
 }

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class SupportUpDao {
 
-    public void updateSupport(int atcid,int support) throws SQLException {
+    public void updateSupport(int support,int atcid) throws SQLException {
         MySQLConnection mySQLConnection = new MySQLConnection();
         String sql="UPDATE massages SET support =? WHERE atcid =?";
         Connection connection=mySQLConnection.getConnection();
