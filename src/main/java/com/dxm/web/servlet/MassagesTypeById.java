@@ -24,7 +24,6 @@ public class MassagesTypeById extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json;charset=utf-8");
         int id=Integer.parseInt(req.getParameter("id"));
-        PrintWriter out = resp.getWriter();
         try {
             List<Massages> outMassages=massagersTypeService.massagesType(id);
             ServletJson.sendJson(resp,outMassages);
