@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MassagesDao {
+public class SearchDao {
     MySQLConnection mySQLConnection= new MySQLConnection();
-    public List<Massages> massagesList() throws SQLException {
+    public List<Massages> massagesList(int pag) throws SQLException {
         Connection connection=mySQLConnection.getConnection();
-        String sql = "select * from massages order by atcid desc";
+        String sql = "select * from massages order by atcid desc limit "+pag+",5 ";
         PreparedStatement preparedStatement=connection.prepareStatement(sql);
         ResultSet resultSet=preparedStatement.executeQuery();
         List<Massages> massagesList=new ArrayList<>();

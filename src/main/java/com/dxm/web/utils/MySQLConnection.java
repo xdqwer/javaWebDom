@@ -12,7 +12,6 @@ public class MySQLConnection {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         return DriverManager.getConnection(url, user, password);
     }
 
