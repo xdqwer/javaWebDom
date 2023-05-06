@@ -15,25 +15,25 @@ public class UserService {
     }
 
     //登录判断
-    public boolean login(String username,String password) throws SQLException, NoSuchAlgorithmException {
+    public int login(String username,String password) throws SQLException, NoSuchAlgorithmException {
        List<User> userOn = userDao.selectAll();
         Md5Utils md5Utils = new Md5Utils();
         String passwordMd = md5Utils.md5(password);
-       boolean tf=false;
+       int tf=0;
         for(int i = 0; i < userOn.size(); i++)
         {
                 if (username.equals(userOn.get(i).getUser_name()) && passwordMd.equals(userOn.get(i).getPassword())){
-                    tf = true;
+                    tf = userOn.get(i).getId();
                 }
         }
         return tf;
     }
 
 
-//    public static void main(String[] args) throws SQLException {
-//        UserService userService = new UserService();
-//        List<User> users = userService.userList();
-//        System.out.println(users);
-//
+//    public static void main(String[] args) throws NoSuchAlgorithmException {
+//        Md5Utils md5Utils = new Md5Utils();
+//        String password="12345";
+//        String passwordMd = md5Utils.md5(password);
+//        System.out.println(passwordMd);
 //    }
 }

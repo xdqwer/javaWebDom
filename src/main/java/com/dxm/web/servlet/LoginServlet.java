@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String username=req.getParameter("username");
         String password=req.getParameter("password");
-        boolean tf=false;
+        int tf=0;
         try {
             tf = userService.login(username,password);
             out.print(tf);

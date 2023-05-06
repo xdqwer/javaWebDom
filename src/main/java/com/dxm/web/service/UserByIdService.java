@@ -10,7 +10,6 @@ import java.util.List;
 public class UserByIdService {
 
     public List<User> reqUserById(int userid) throws SQLException {
-
         UserByIdDao userByIdDao = new UserByIdDao();
         List<User> userList=userByIdDao.reqUserById(userid);
         return  userList;

@@ -2,7 +2,6 @@ package com.dxm.web.utils;
 
 import sun.misc.BASE64Encoder;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

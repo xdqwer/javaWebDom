@@ -12,11 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchDao {
-    MySQLConnection mySQLConnection= new MySQLConnection();
-    public List<Massages> massagesList(int pag) throws SQLException {
+
+    public List<Massages> massagesList(String keyWord) throws SQLException {
+        MySQLConnection mySQLConnection= new MySQLConnection();
         Connection connection=mySQLConnection.getConnection();
-        String sql = "select * from massages order by atcid desc limit "+pag+",5 ";
+        String sql = "SELECT * FROM massages WHERE title  LIKE ?";
         PreparedStatement preparedStatement=connection.prepareStatement(sql);
+        preparedStatement.setString(1,"%"+keyWord+"%");
         ResultSet resultSet=preparedStatement.executeQuery();
         List<Massages> massagesList=new ArrayList<>();
         while (resultSet.next()){
@@ -34,5 +36,18 @@ public class SearchDao {
         mySQLConnection.closeConnection(connection);
         return massagesList;
     }
+
+//    public static void main(String[] args) throws SQLException {
+//        MySQLConnection mySQLConnection= new MySQLConnection();
+//        Connection connection=mySQLConnection.getConnection();
+//        String sql = "SELECT * FROM massages WHERE title  LIKE ?";
+//        PreparedStatement preparedStatement=connection.prepareStatement(sql);
+//        String keyWord="累吗";
+//        preparedStatement.setString(1,"%"+keyWord+"%");
+//        ResultSet resultSet=preparedStatement.executeQuery();
+//        if (resultSet.next()){
+//            System.out.println(resultSet.getString("title"));
+//        }
+//    }
 
 }

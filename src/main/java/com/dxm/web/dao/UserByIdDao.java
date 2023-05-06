@@ -26,6 +26,7 @@ public class UserByIdDao {
             user.setUser_name(resultSet.getString("user_name"));
             user.setPassword(resultSet.getString("password"));
             user.setEmail(resultSet.getString("email"));
+            user.setAvatar(resultSet.getString("avatar"));
             userList.add(user);
         }
         return userList;
