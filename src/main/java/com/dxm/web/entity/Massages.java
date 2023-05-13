@@ -1,12 +1,10 @@
 package com.dxm.web.entity;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Massages {
     private int atcid;
     private int userid;

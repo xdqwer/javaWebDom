@@ -6,16 +6,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao {
+public class AllUserDao {
     MySQLConnection mySQLConnection=new MySQLConnection();
     public Connection getConnection() throws SQLException {
         Connection connection = mySQLConnection.getConnection();
         return connection;
     }
-    public List<User> selectAll() throws SQLException {
+    public List<User> selectAll(int pageNumber) throws SQLException {
         PreparedStatement statement = null;
         List<User> userList = new ArrayList<>();
-        String sql = "select *  from user";
+        String sql = "SELECT * FROM user LIMIT "+pageNumber+",10";
         Connection connection = getConnection();
         statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
@@ -26,8 +26,6 @@ public class UserDao {
             user.setUser_name(resultSet.getString("user_name"));
             user.setPassword(resultSet.getString("password"));
             user.setEmail(resultSet.getString("email"));
-            user.setAvatar(resultSet.getString("avatar"));
-            user.setType(resultSet.getInt("type"));
             userList.add(user);
         }
         mySQLConnection.closeConnection(connection);

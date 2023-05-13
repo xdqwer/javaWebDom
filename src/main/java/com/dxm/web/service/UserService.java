@@ -5,7 +5,9 @@ import com.dxm.web.utils.Md5Utils;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserService {
     public UserDao userDao  = new UserDao();;
@@ -15,18 +17,21 @@ public class UserService {
     }
 
     //登录判断
-    public int login(String username,String password) throws SQLException, NoSuchAlgorithmException {
-       List<User> userOn = userDao.selectAll();
+    public Map<String,String>  login(String username,String password) throws SQLException, NoSuchAlgorithmException {
+        List<User> userOn = userDao.selectAll();
         Md5Utils md5Utils = new Md5Utils();
         String passwordMd = md5Utils.md5(password);
-       int tf=0;
+        Map<String,String> map=new HashMap<>();
         for(int i = 0; i < userOn.size(); i++)
         {
                 if (username.equals(userOn.get(i).getUser_name()) && passwordMd.equals(userOn.get(i).getPassword())){
-                    tf = userOn.get(i).getId();
+                    int id = userOn.get(i).getId();
+                    int type = userOn.get(i).getType();
+                    map.put("id",id+"");
+                    map.put("type",type+"");
                 }
         }
-        return tf;
+        return  map;
     }
 
 

@@ -1,5 +1,7 @@
 package com.dxm.web.servlet;
 
+import cn.hutool.json.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.dxm.web.service.UserService;
 
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Map;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -23,10 +26,10 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String username=req.getParameter("username");
         String password=req.getParameter("password");
-        int tf=0;
         try {
-            tf = userService.login(username,password);
-            out.print(tf);
+            Map<String, String> login = userService.login(username, password);
+            Object o = JSONObject.toJSON(login);
+            out.print(o);
         } catch (SQLException | NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
