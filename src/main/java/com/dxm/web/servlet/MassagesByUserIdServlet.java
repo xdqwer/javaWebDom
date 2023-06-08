@@ -2,7 +2,7 @@ package com.dxm.web.servlet;
 
 
 import com.dxm.web.entity.Massages;
-import com.dxm.web.service.MassagesByUserIdServie;
+import com.dxm.web.service.MassagesByUserIdService;
 import com.dxm.web.utils.ServletJson;
 
 import javax.servlet.ServletException;
@@ -22,11 +22,12 @@ public class MassagesByUserIdServlet extends HttpServlet {
         resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, HEAD, DELETE, PUT");
         req.setCharacterEncoding("UTF-8");
+
         resp.setContentType("application/json;charset=utf-8");
-        int userid = Integer.parseInt(req.getParameter("userid"));
-        MassagesByUserIdServie massagesByUserIdServie = new MassagesByUserIdServie();
+        String userid = req.getParameter("userid");
+        MassagesByUserIdService massagesByUserIdService = new MassagesByUserIdService();
         try {
-            List<Massages> massagesList= massagesByUserIdServie.UserIdMassages(userid);
+            List<Massages> massagesList= massagesByUserIdService.UserIdMassages(userid);
             ServletJson.sendJson(resp,massagesList);
         } catch (SQLException e) {
             throw new RuntimeException(e);

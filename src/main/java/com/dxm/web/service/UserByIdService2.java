@@ -9,14 +9,10 @@ import redis.clients.jedis.Jedis;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserByIdService {
-
-    public List<User> reqUserById(String userid) throws SQLException {
+public class UserByIdService2 {
+    public List<User> reqUserById(int userid) throws SQLException {
         UserByIdDao userByIdDao = new UserByIdDao();
-        Jedis jedis = RedisUtil.getJedis();
-        String uuid = JwtUtils.getToken(userid);
-        String s = jedis.get(uuid);
-        List<User> userList=userByIdDao.reqUserById(Integer.parseInt(s));
+        List<User> userList=userByIdDao.reqUserById(userid);
         return  userList;
     }
 }
